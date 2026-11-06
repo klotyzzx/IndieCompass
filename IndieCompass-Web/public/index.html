@@ -1,0 +1,41 @@
+<!doctype html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Инди-компас — найди свою игру</title><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/style.css"><script src="/app.js" type="module"></script></head>
+<body>
+<aside class="rail">
+ <a class="brand" href="/" aria-label="Инди-компас"><img src="/favicon.svg" width="39" height="39" alt=""><span>инди<span class="brand-light">компас</span><small>СЛЕДУЙ ЗА ИНТЕРЕСОМ</small></span></a>
+ <div class="nav-label">ТВОЁ ПРОСТРАНСТВО</div>
+ <nav aria-label="Разделы"><button class="nav-item active" id="discover"><span>◈</span> Найти игру <i>↗</i></button><button class="nav-item" id="favorites"><span>♡</span> Избранное <b id="fav-count">0</b></button></nav>
+ <div class="rail-note"><span class="tiny-orbit">✳</span><strong>Не только знакомые имена</strong><p>Большие открытия часто начинаются с маленьких студий.</p><button class="text-button" id="indie-shortcut">Исследовать инди ↗</button></div>
+ <div class="rail-bottom"><label for="region">Регион магазина</label><select id="region"><option value="ru">Россия · RUB</option><option value="kz">Казахстан · KZT</option><option value="us">США · USD</option><option value="de">Германия · EUR</option><option value="tr">Турция · USD</option></select><p>Цены и доступность зависят от региона.</p><button id="restore" class="text-button">Вернуть скрытые (0)</button><div class="local-badge"><span></span> Предпочтения на устройстве</div></div>
+</aside>
+<div class="workspace">
+ <header class="topbar"><span class="breadcrumb">Обзор <span>/</span> <b id="section-title">Найти игру</b></span><form id="search-form" role="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Название игры…" aria-label="Поиск по названию" maxlength="120"><kbd>Enter ↵</kbd></form><span class="source-pill">STEAM <span>↗</span></span></header>
+ <main>
+ <section class="hero" id="hero"><div class="hero-copy"><div class="eyebrow"><span></span> МЕНЬШЕ ПОИСКОВ. БОЛЬШЕ ИГР.</div><h1>Твоя следующая<br><em>любимая игра.</em></h1><p>Загляни за пределы привычного.<br>Найди то, во что захочется погрузиться.</p><div class="hero-foot"><span class="mini-compass">↗</span> Живой каталог Steam <span class="dot-sep">·</span> Без аккаунта</div></div><div class="hero-art" aria-hidden="true"><div class="orbit o1"></div><div class="orbit o2"></div><div class="orbit o3"></div><span class="coordinate c1">55°45′ N</span><span class="coordinate c2">ТВОЁ НОВОЕ ОТКРЫТИЕ</span><div class="needle"><span></span></div><span class="star s1">✦</span><span class="star s2">+</span><span class="orbit-dot"></span></div></section>
+ <div id="compact-tools" class="compact-tools"></div>
+ <section class="quick-row" aria-label="Быстрый подбор"><span>Сегодня хочется…</span><button data-quick="horror">☾ Пощекотать нервы</button><button data-quick="simulation">▦ Что-нибудь построить</button><button data-quick="relaxing">❋ Просто выдохнуть</button><button data-quick="indie">✦ Открыть инди</button></section>
+ <div class="catalog-layout">
+ <aside class="filters" aria-label="Фильтры каталога"><div class="filter-title"><h2>Фильтры</h2><button id="reset" class="text-button">Сбросить</button></div>
+ <form id="filters-form">
+ <label>Жанры / теги Steam<select id="tag" multiple aria-label="Жанры и теги Steam"><option value="indie">Инди</option><option value="horror">Хоррор</option><option value="simulation">Симулятор</option><option value="adventure">Приключение</option><option value="action">Экшен</option><option value="puzzle">Головоломка</option><option value="survival">Выживание</option></select><span class="genre-help">Можно несколько · сочетаются через «И»</span></label>
+ <label>Атмосфера<select id="mood"><option value="">Любая</option><option value="relaxing">Расслабляющая</option><option value="atmospheric">Атмосферная</option></select></label>
+ <fieldset><legend>Дата выхода в Steam</legend><label class="date-label">С<input id="from" type="date" aria-label="Дата выхода с"></label><label class="date-label">По<input id="to" type="date" aria-label="Дата выхода по"></label><p class="help">Точный период, обе даты включены.</p></fieldset>
+ <label>Стоимость<select id="price"><option value="">Любая</option><option value="free">Бесплатные</option><option value="paid">Платные</option><option value="sale">Со скидкой</option></select></label>
+ <label>Отзывы игроков<select id="minRating"><option value="0">Любые</option><option value="70">От 70% положительных</option><option value="80">От 80% положительных</option><option value="90">От 90% положительных</option></select></label>
+ <label>Как играть<select id="mode"><option value="">Любой режим</option><option value="single">Одиночная игра</option><option value="coop">Кооператив</option><option value="multi">Мультиплеер</option></select></label>
+ <label>Платформа<select id="os"><option value="">Любая</option><option value="win">Windows</option><option value="mac">macOS</option><option value="linux">Linux / SteamOS</option></select></label>
+ <label class="checkbox"><input id="russian" type="checkbox"><span>Есть русский язык</span></label>
+ <button class="primary apply" type="submit">Найти игры <span>↗</span></button>
+ </form><p class="filter-note">Язык и режимы — по данным Steam. Тег «инди» можно отключить, чтобы искать любые игры.</p></aside>
+ <section class="results" aria-labelledby="results-title"><div class="results-header"><div><div class="eyebrow small" id="results-eyebrow">ВЫБИРАЙ СВОЁ</div><h2 id="results-title">Стоит присмотреться <span id="result-count"></span></h2></div><label class="sort-label"><span class="sr-only">Сортировка</span><select id="sort"><option value="popular">По релевантности</option><option value="new">Сначала новые</option><option value="rating">По отзывам Steam</option><option value="cheap">Сначала дешевле</option><option value="name">По названию</option></select></label></div>
+ <div id="active-filters" class="active-filters"></div><div id="notice" class="notice" hidden></div><p id="progress" class="progress" role="status" aria-live="polite"></p>
+ <div id="cards" class="cards"></div>
+ <div id="empty" class="empty" hidden><span>◈</span><h3 id="empty-title">Пока ничего не найдено</h3><p id="empty-text"></p><button id="retry" class="secondary">Попробовать снова</button></div>
+ <div class="load-area"><button id="load-more" class="secondary" hidden>Показать ещё <span>↓</span></button></div>
+ <footer>Данные и изображения: Steam и правообладатели игр. <span>Не аффилирован с Valve.</span><br>Каталог загружается страницами. Недоступные и снятые с продажи игры могут отсутствовать.</footer>
+ </section></div>
+ </main>
+</div>
+<dialog id="details" class="details"><button id="close-details" class="close-button" aria-label="Закрыть подробности">✕</button><div id="detail-content"></div></dialog>
+<dialog id="lightbox" class="lightbox"><button id="close-lightbox" class="close-button" aria-label="Закрыть скриншот">✕</button><img id="full-image" alt="Скриншот игры"></dialog>
+<div id="toast" class="toast" role="status" hidden></div>
+</body></html>

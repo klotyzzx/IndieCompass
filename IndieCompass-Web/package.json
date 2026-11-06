@@ -1,0 +1,31 @@
+{
+  "name": "indie-compass",
+  "version": "2.1.0",
+  "private": true,
+  "type": "module",
+  "main": "desktop.cjs",
+  "scripts": {
+    "start": "node launcher.mjs",
+    "test": "node --test test/*.test.mjs",
+    "desktop": "electron .",
+    "dist": "electron-builder --win portable"
+  },
+  "devDependencies": {
+    "electron": "^42.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "org.indiecompass.desktop",
+    "productName": "IndieCompass",
+    "files": [
+      "desktop.cjs",
+      "server.mjs",
+      "lib/**",
+      "public/**",
+      "package.json"
+    ],
+    "win": {
+      "target": "portable"
+    }
+  }
+}
